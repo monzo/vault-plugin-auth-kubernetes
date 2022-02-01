@@ -84,6 +84,14 @@ then this plugin will use kubernetes.io/serviceaccount as the default issuer.
 					Name: "Disable use of local CA and service account JWT",
 				},
 			},
+			"enable_custom_metadata_from_annotations": {
+				Type:        framework.TypeBool,
+				Description: "Enable reading and parsing annotations from service account for policy templating",
+				Default:     false,
+				DisplayAttrs: &framework.DisplayAttributes{
+					Name: "Enable reading and parsing service account annotations",
+				},
+			},
 		},
 		Callbacks: map[logical.Operation]framework.OperationFunc{
 			logical.UpdateOperation: b.pathConfigWrite,
@@ -112,6 +120,7 @@ func (b *kubeAuthBackend) pathConfigRead(ctx context.Context, req *logical.Reque
 				"issuer":                 config.Issuer,
 				"disable_iss_validation": config.DisableISSValidation,
 				"disable_local_ca_jwt":   config.DisableLocalCAJwt,
+				"enable_custom_metadata_from_annotations": config.EnableCustomMetadataFromAnnotations,
 			},
 		}
 
@@ -132,6 +141,7 @@ func (b *kubeAuthBackend) pathConfigWrite(ctx context.Context, req *logical.Requ
 	issuer := data.Get("issuer").(string)
 	disableIssValidation := data.Get("disable_iss_validation").(bool)
 	tokenReviewer := data.Get("token_reviewer_jwt").(string)
+	enableCustomMetadata := data.Get("enable_custom_metadata_from_annotations").(bool)
 
 	if tokenReviewer != "" {
 		// Validate it's a JWT, but don't verify the signature, since we may not have the right cert.
@@ -146,14 +156,15 @@ func (b *kubeAuthBackend) pathConfigWrite(ctx context.Context, req *logical.Requ
 	}
 
 	config := &kubeConfig{
-		PublicKeys:           make([]interface{}, len(pemList)),
-		PEMKeys:              pemList,
-		Host:                 host,
-		CACert:               caCert,
-		TokenReviewerJWT:     tokenReviewer,
-		Issuer:               issuer,
-		DisableISSValidation: disableIssValidation,
-		DisableLocalCAJwt:    disableLocalJWT,
+		PublicKeys:                          make([]interface{}, len(pemList)),
+		PEMKeys:                             pemList,
+		Host:                                host,
+		CACert:                              caCert,
+		TokenReviewerJWT:                    tokenReviewer,
+		Issuer:                              issuer,
+		DisableISSValidation:                disableIssValidation,
+		DisableLocalCAJwt:                   disableLocalJWT,
+		EnableCustomMetadataFromAnnotations: enableCustomMetadata,
 	}
 
 	b.l.Lock()
@@ -223,6 +234,9 @@ type kubeConfig struct {
 	// the local CA cert and service account jwt when running in a Kubernetes
 	// pod
 	DisableLocalCAJwt bool `json:"disable_local_ca_jwt"`
+	// EnableCustomMetadataFromAnnotations is an optional parameter which will cause
+	// us to read the kubernetes ServiceAccount's annotations as metadata of auth alias.
+	EnableCustomMetadataFromAnnotations bool `json:"enable_custom_metadata_from_annotations"`
 }
 
 // PasrsePublicKeyPEM is used to parse RSA and ECDSA public keys from PEMs
