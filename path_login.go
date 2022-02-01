@@ -318,15 +318,6 @@ func (b *kubeAuthBackend) parseAndValidateJWT(ctx context.Context, jwtStr string
 		}
 	}
 
-	if config.EnableCustomMetadataFromAnnotations {
-		annotations, err := b.serviceAccountReaderFactory(config).ReadAnnotations(ctx, sa.Name, sa.Namespace)
-		if err != nil {
-			return nil, err
-		}
-
-		sa.Annotations = annotations
-	}
-
 	// perform ISS Claim validation if configured
 	if !config.DisableISSValidation {
 		// set the expected issuer to the default kubernetes issuer if the config doesn't specify it
@@ -347,6 +338,16 @@ func (b *kubeAuthBackend) parseAndValidateJWT(ctx context.Context, jwtStr string
 			return nil, logical.CodedError(http.StatusForbidden, "invalid audience")
 		}
 	}
+
+	if config.EnableCustomMetadataFromAnnotations {
+		annotations, err := b.serviceAccountReaderFactory(config).ReadAnnotations(ctx, sa.Name, sa.Namespace)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read serviceaccount annotations: %v", err)
+		}
+
+		sa.Annotations = annotations
+	}
+
 	// If we don't have any public keys to verify, return the sa and end early.
 	if len(config.PublicKeys) == 0 {
 		return sa, nil
