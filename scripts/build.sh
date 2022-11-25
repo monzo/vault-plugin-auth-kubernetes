@@ -22,7 +22,7 @@ GIT_DIRTY="$(test -n "`git status --porcelain`" && echo "+CHANGES" || true)"
 
 # Determine the arch/os combos we're building for
 XC_ARCH=${XC_ARCH:-"amd64 arm64"}
-XC_OS=${XC_OS:-"linux" "darwin"}
+XC_OS=${XC_OS:-"linux darwin"}
 XC_OSARCH=${XC_OSARCH:-"linux/amd64 linux/arm64 darwin/amd64 darwin/arm64"}
 
 GOPATH=${GOPATH:-$(go env GOPATH)}
