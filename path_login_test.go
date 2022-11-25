@@ -1109,53 +1109,53 @@ func (s *mockServiceAccountReader) ReadAnnotations(ctx context.Context, name, na
 // jwtProjectedData is a Projected Service Account jwt with expiration set to
 // 05 Nov 2030 04:19:57 (UTC)
 //
-// {
-// 	"aud": [
-// 	  "kubernetes.default.svc"
-// 	],
-// 	"exp": 1920082797,
-// 	"iat": 1604082797,
-// 	"iss": "kubernetes/serviceaccount",
-// 	"kubernetes.io": {
-// 	  "namespace": "default",
-// 	  "pod": {
-// 		"name": "vault",
-// 		"uid": "086c2f61-dea2-47bb-b5ca-63e63c5c9885"
-// 	  },
-// 	  "serviceaccount": {
-// 		"name": "default",
-// 		"uid": "77c81ad7-1bea-4d94-9ca5-f5d7f3632331"
-// 	  }
-// 	},
-// 	"nbf": 1604082797,
-// 	"sub": "system:serviceaccount:default:default"
-// }
+//	{
+//		"aud": [
+//		  "kubernetes.default.svc"
+//		],
+//		"exp": 1920082797,
+//		"iat": 1604082797,
+//		"iss": "kubernetes/serviceaccount",
+//		"kubernetes.io": {
+//		  "namespace": "default",
+//		  "pod": {
+//			"name": "vault",
+//			"uid": "086c2f61-dea2-47bb-b5ca-63e63c5c9885"
+//		  },
+//		  "serviceaccount": {
+//			"name": "default",
+//			"uid": "77c81ad7-1bea-4d94-9ca5-f5d7f3632331"
+//		  }
+//		},
+//		"nbf": 1604082797,
+//		"sub": "system:serviceaccount:default:default"
+//	}
 var jwtProjectedData = "eyJhbGciOiJSUzI1NiIsImtpZCI6InBKY3hrSjRxME8xdE90MFozN1ZCNi14Nk13OHhGWlN4TTlyb1B0TVFxMEEifQ.eyJhdWQiOlsia3ViZXJuZXRlcy5kZWZhdWx0LnN2YyJdLCJleHAiOjE5MjAwODI3OTcsImlhdCI6MTYwNDA4Mjc5NywiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCIsImt1YmVybmV0ZXMuaW8iOnsibmFtZXNwYWNlIjoiZGVmYXVsdCIsInBvZCI6eyJuYW1lIjoidmF1bHQiLCJ1aWQiOiIwODZjMmY2MS1kZWEyLTQ3YmItYjVjYS02M2U2M2M1Yzk4ODUifSwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImRlZmF1bHQiLCJ1aWQiOiI3N2M4MWFkNy0xYmVhLTRkOTQtOWNhNS1mNWQ3ZjM2MzIzMzEifX0sIm5iZiI6MTYwNDA4Mjc5Nywic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6ZGVmYXVsdCJ9.fh9yPq8zPQR4Gms6sNpn82yppV5ONWaAVzEYnFSrOK_mM69wn51bCtdG3ARJjbBoZv6wK7bNfwSKlD3nar1QTCpyz5UKW_f_m9J7IqVdLnNIjEXhuzTv2WlxFV4VeXSYX9Q6ndUsWO-m1iKdPCkIm8sHKKv9BYVtFyhEgwSDsisX2YmseHMO8j1lpROlgrv4JvUfJ7m7tn2vV4B0WiM3djwVg2Uqv830mzZ-w0VKEuqBtUzw3zisNWa96N6DcokVebD4ZzUU2-YQPWE9ccjy0NW0frCCwFO1KiVMW9E7KTQ3qMq-B8-ZTrdV58ba-EgEnbOLsmLgp4Z_e_bmvJx4hg"
 
 // jwtProjectedDataExpired is a Projected Service Account jwt with expiration
 // set to 30 Oct 2020 18:51:26 (UTC)
 //
-// {
-// 	"aud": [
-// 	  "kubernetes.default.svc"
-// 	],
-// 	"exp": 1604083886,
-// 	"iat": 1604083286,
-// 	"iss": "kubernetes/serviceaccount",
-// 	"kubernetes.io": {
-// 	  "namespace": "default",
-// 	  "pod": {
-// 		"name": "vault",
-// 		"uid": "34be4d5f-66d3-4a29-beea-ce23e51f9fb8"
-// 	  },
-// 	  "serviceaccount": {
-// 		"name": "default",
-// 		"uid": "77c81ad7-1bea-4d94-9ca5-f5d7f3632331"
-// 	  }
-// 	},
-// 	"nbf": 1604083286,
-// 	"sub": "system:serviceaccount:default:default"
-// }
+//	{
+//		"aud": [
+//		  "kubernetes.default.svc"
+//		],
+//		"exp": 1604083886,
+//		"iat": 1604083286,
+//		"iss": "kubernetes/serviceaccount",
+//		"kubernetes.io": {
+//		  "namespace": "default",
+//		  "pod": {
+//			"name": "vault",
+//			"uid": "34be4d5f-66d3-4a29-beea-ce23e51f9fb8"
+//		  },
+//		  "serviceaccount": {
+//			"name": "default",
+//			"uid": "77c81ad7-1bea-4d94-9ca5-f5d7f3632331"
+//		  }
+//		},
+//		"nbf": 1604083286,
+//		"sub": "system:serviceaccount:default:default"
+//	}
 var jwtProjectedDataExpired = "eyJhbGciOiJSUzI1NiIsImtpZCI6InBKY3hrSjRxME8xdE90MFozN1ZCNi14Nk13OHhGWlN4TTlyb1B0TVFxMEEifQ.eyJhdWQiOlsia3ViZXJuZXRlcy5kZWZhdWx0LnN2YyJdLCJleHAiOjE2MDQwODM4ODYsImlhdCI6MTYwNDA4MzI4NiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCIsImt1YmVybmV0ZXMuaW8iOnsibmFtZXNwYWNlIjoiZGVmYXVsdCIsInBvZCI6eyJuYW1lIjoidmF1bHQiLCJ1aWQiOiIzNGJlNGQ1Zi02NmQzLTRhMjktYmVlYS1jZTIzZTUxZjlmYjgifSwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImRlZmF1bHQiLCJ1aWQiOiI3N2M4MWFkNy0xYmVhLTRkOTQtOWNhNS1mNWQ3ZjM2MzIzMzEifX0sIm5iZiI6MTYwNDA4MzI4Niwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6ZGVmYXVsdCJ9.dpsCBhOC-7yy47JgoSN1rCafLVR_wV9drXfRPqZotj_KszG-Oyq8zO3HmZTRM7aWqwR7X-Zna04DdnIktLuLaRvLfOMkRDJsdfzsxMlRNqaxVkJq3fRYTbJwcsM9xNiquJ16lfZmQV2VE64kYFTiN_3-kkGY05z_CvzqZcEfnKhdUTuvNXIP893rdk-72kKFa1HuWz0c6vgOOoxMf4hsoNhzgVAp5P39ZpQvZLNMhwaUcbhq55WxuaGsBcm7SNLfkT-hNG06RQXhSwo_qTXo9gZzPhG7bm4nNDh_wg7b4ORQVBe00kqiFhfyH7bBdwZliKKi3xxw43wpbC2cS8nyDA"
 
 // testMinikubePubKey is the public key of the minikube instance used to
@@ -1165,16 +1165,15 @@ var jwtProjectedDataExpired = "eyJhbGciOiJSUzI1NiIsImtpZCI6InBKY3hrSjRxME8xdE90M
 // To setup a minikube instance to replicate or re-generate keys if needed, use
 // this invocation:
 //
-// minikube start --kubernetes-version v1.18.10  \
-//   --feature-gates="TokenRequest=true,TokenRequestProjection=true" \
-//   --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
-//   --extra-config=apiserver.service-account-issuer="kubernetes/serviceaccount" \
-//   --extra-config=apiserver.service-account-api-audiences="kubernetes.default.svc" \
-//   --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub
+//	minikube start --kubernetes-version v1.18.10  \
+//	  --feature-gates="TokenRequest=true,TokenRequestProjection=true" \
+//	  --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
+//	  --extra-config=apiserver.service-account-issuer="kubernetes/serviceaccount" \
+//	  --extra-config=apiserver.service-account-api-audiences="kubernetes.default.svc" \
+//	  --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub
 //
 // When Minikube is up, use `minikube ssh` to connect and extract the contents
 // of sa.pub for use here.
-//
 var testMinikubePubKey = `
 -----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAygmU/WKtGT77GhHYbEmR
